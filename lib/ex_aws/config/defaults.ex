@@ -17,6 +17,12 @@ defmodule ExAws.Config.Defaults do
   }
 
   @defaults %{
+    elasticbeanstalk: %{
+      scheme: "https://",
+      host: {"$region", "elasticbeanstalk.$region.amazonaws.com"},
+      region: "us-east-1",
+      port: 80
+    },
     kinesis: %{
       scheme: "https://",
       host: {"$region", "kinesis.$region.amazonaws.com"},
