@@ -152,9 +152,9 @@ if Code.ensure_loaded?(SweetXml) do
       request_id: request_id_xpath,
       environments: [
         ~x"./DescribeEnvironmentsResult/Environments/member"l,
-        version_label: ~x"./VersionLabel/text()",
-        status: ~x"./Status/text()",
-        application_name: ~x"./ApplicationName/text()",
+        version_label: ~x"./VersionLabel/text()"s,
+        status: ~x"./Status/text()"s,
+        application_name: ~x"./ApplicationName/text()"s,
         endpoint_url: ~x"./EnvironmentURL/text()"s,
         cname: ~x"./CNAME/text()"s,
         health: ~x"./Health/text()"s,
@@ -168,7 +168,7 @@ if Code.ensure_loaded?(SweetXml) do
           ~x"./Tier"o,
           name: ~x"./Name/text()"s,
           type: ~x"./Type/text()"s,
-          version: ~x"./Version/text()"o
+          version: ~x"./Version/text()"so
         ],
         abortable_operation_in_progress: ~x"./AbortableOperationInProgress/text()" |> SweetXml.transform_by(&to_boolean/1),
         environment_links: [
@@ -188,8 +188,8 @@ if Code.ensure_loaded?(SweetXml) do
       ~x"./ResponseMetadata/RequestId/text()"s
     end
 
-    defp date_xpath(type) when type == :created, do: ~x"./DateCreated/text()"
-    defp date_xpath(type) when type == :updated, do: ~x"./DateUpdated/text()"
+    defp date_xpath(type) when type == :created, do: ~x"./DateCreated/text()"s
+    defp date_xpath(type) when type == :updated, do: ~x"./DateUpdated/text()"s
 
     defp to_boolean(value) when value == 'true', do: true
     defp to_boolean(_), do: false
